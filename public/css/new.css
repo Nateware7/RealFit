@@ -1,0 +1,16 @@
+.realsix { 
+    background : #f9f8f5
+}
+.track{
+    font-size: .875rem;
+    color: #43423f;
+    margin-bottom: 1rem;
+    line-height: 110%;
+}
+
+.Footer_privacySocial__FI6ih {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+}

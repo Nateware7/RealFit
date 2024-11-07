@@ -1,11 +1,37 @@
 <%- include('partials/header') -%>
 
-<main class="container">
-    <div class="row justify-content-around mt-5">
-        <a href="/login" class="col-3 btn btn-primary"> Login</a>
-        <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
+<!-- Hero Section -->
+<section class="grid grid-cols-3 p-0">
+    <!-- Left Image -->
+    <div class="col-span-1 overflow-hidden">
+      <img src="/imgs/volley.png" alt="Logo" class="w-full h-full object-cover">
     </div>
-</main>
-    
-
+    <!-- Center Sign-Up Form -->
+    <div class="flex items-center justify-center p-8 bg-white col-span-1 md:col-span-1">
+      <div class="text-center">
+        <h2 class="text-2xl font-semibold  text-black  text-pretty mb-2">Community-Powered Motivation</h2>
+        <p class="track ">Join & Track your progress and cheer each other on.<br>RealFit is a community-powered motivation app.</p>
+        <p class="track">Already a Member?<a href="/login" class="text-orange-600"> Log In </a></p>
+        <ul class="flex flex-col">
+          <li><a href="/signup" class="btn w-full bg-orange-600 hover:opacity-75 text-white font-semibold hover:bg-gray-400 rounded-md mt-0"> Sign up</a></li>
+          <li><a href="/signup" class="btn w-full bg-white border text-black border-black hover:bg-gray-300 mt-2">
+            <img src="/imgs/apple.png" alt="Apple Logo" class="w-4 h-4 mr-2">
+            Sign Up With Apple
+          </a></li>
+          <li><a href="/signup" class="btn w-full bg-white border text-black hover:bg-gray-300 border-black mt-2">
+            <img src="/imgs/google.png" alt="Google Logo" class="w-4 h-4 mr-2">
+            Sign Up With Google
+          </a></li>
+          <li><a href="/login" class="btn w-full bg-black text-white font-semibold rounded-md mt-2 mb-2">Sign In</a></li>
+        </ul>
+        <span class="track mt-16">By signing up for RealFit, you agree to the Terms of Service. View our <a href="#" class="text-orange-600 underline">Privacy Policy</a>.
+        </p></span>
+      </div>
+    </div>
+    <!-- Right Image -->
+     <div class="col-span-1 overflow-hidden">
+      <img src="/imgs/chkn.png" alt="Logo" class="w-full h-full object-cover">
+     </div>
+  </section>
+ 
 <%- include('partials/footer') -%>

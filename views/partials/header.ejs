@@ -31,8 +31,13 @@
       <nav class="flex items-center justify-between bg-white p-2 shadow-current">
         <!-- Left: Logo/Image -->
         <div class="mx-auto">
-          <img src="/RealBrand/text.png" alt="Logo" class="h-10 w-auto">
+          <a href="/feed" aria-label="R">
+            <img src="/RealBrand/text.png" alt="RealFit" class="h-10 w-auto" />
+          </a>
         </div>
+        <% if (user) { %>
+          <a class="text-red-600" href="/profile">Return to Profile</a>
+        <% } %>
       </nav>
     </header>
   </body>

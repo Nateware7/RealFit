@@ -6,6 +6,7 @@ exports.getLogin = (req, res) => {
   if (req.user) {
     return res.redirect("/profile");
   }
+  res.set('Cache-Control', 'no-store');
   res.render("login", {
     title: "Login",
   });

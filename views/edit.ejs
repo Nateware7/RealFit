@@ -1,6 +1,13 @@
 <%- include('partials/header') -%>
-
-<div>
+<form action="/profile" method="POST" class="space-y-4">
+    <div class="mb-4">
+      <label for="bio" class="block text-white font-semibold mb-2">Bio</label>
+      <input type="text" class="text-black bg-white border-gray-800" id="bio" name="bio" value="<%= user.bio %>">
+    </div>
+    <div>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>
 <a href="/logout" class="col-3 btn btn-primary">Logout</a>
 </div>
 

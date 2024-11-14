@@ -54,7 +54,7 @@ app.use(passport.session());
 //Use flash messages for errors, info, ect...
 app.use(flash());
 
-// Add this middleware to make user available in all views
+//Middleware to make user available in all views
 app.use((req, res, next) => {
   res.locals.user = req.user;
   next();

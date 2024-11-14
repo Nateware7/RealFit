@@ -5,6 +5,7 @@
           <div>
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
+              <p><strong>Bio</strong>: <%= user.bio || 'The User have no bio ' %></p>
               <a href="/edit" class="col-3 btn btn-primary">Edit Profile</a>
           </div>
           <div class="col-6">
@@ -24,4 +25,5 @@
       </div>  
     </div>
   </div>
+  
 <%- include('partials/footer') -%>

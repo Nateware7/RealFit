@@ -1,16 +1,20 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 const Comment= require("../models/Comment");
+const User = require("../models/User");
+
 
 module.exports = {
   getProfile: async (req, res) => {
     try {
       const posts = await Post.find({ user: req.user.id });
-      res.render("profile.ejs", { posts: posts, user: req.user });
+      const user = await User.findById(req.user.id);
+      res.render("profile.ejs", { posts: posts, user: user });
+  
     } catch (err) {
       console.log(err);
     }
-  },
+  },  
   getAdd: async (req, res) => {
     try {
       const posts = await Post.find({ user: req.user.id });
@@ -89,6 +93,21 @@ module.exports = {
       res.redirect("/profile");
     } catch (err) {
       res.redirect("/profile");
+    }
+  },
+  updateProfile: async (req, res) => {
+    try {
+      const user = await User.findById(req.user.id);
+
+      user.bio = req.body.bio;
+
+
+      await user.save();
+
+      res.redirect("/profile");
+    } catch (err) {
+      console.log(err);
+      res.redirect("/edit");
     }
   },
 };

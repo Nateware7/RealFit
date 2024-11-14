@@ -43,7 +43,9 @@ module.exports = {
     try {
       const post = await Post.findById(req.params.id);
       const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
-      res.render("post.ejs", { post: post, user: req.user, comments: comments });
+      // Fetch the user who created the post
+      const user = await User.findById(post.user);
+      res.render("post.ejs", { post: post, user: req.user, comments: comments , user: user});
     } catch (err) {
       console.log(err);
     }
@@ -69,18 +71,28 @@ module.exports = {
   },
   likePost: async (req, res) => {
     try {
-      await Post.findOneAndUpdate(
-        { _id: req.params.id },
-        {
-          $inc: { likes: 1 },
-        }
-      );
+      const post = await Post.findById(req.params.id);
+  
+      // Check if the user has already liked the post
+      if (post.likedBy.includes(req.user.id)) {
+        // If the user has already liked, prevent the action
+        console.log("You have already liked this post.");
+        return res.redirect(`/post/${req.params.id}`); // Redirect back to the post page
+      }
+  
+      // If not, add the user to the likedBy array and increment the like count
+      post.likes++;
+      post.likedBy.push(req.user.id);
+  
+      await post.save();
+  
       console.log("Likes +1");
-      res.redirect(`/post/${req.params.id}`);
+      res.redirect(`/post/${req.params.id}`); // Redirect to the post page after liking
     } catch (err) {
       console.log(err);
+      res.redirect(`/post/${req.params.id}`);
     }
-  },
+  },  
   deletePost: async (req, res) => {
     try {
       // Find post by id

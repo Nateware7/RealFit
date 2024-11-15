@@ -44,8 +44,8 @@ module.exports = {
       const post = await Post.findById(req.params.id);
       const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
       // Fetch the user who created the post
-      const user = await User.findById(post.user);
-      res.render("post.ejs", { post: post, user: req.user, comments: comments , user: user});
+      const postUser = await User.findById(post.user);
+      res.render("post.ejs", { post: post, loggedInUser: req.user, comments: comments, postUser: postUser });
     } catch (err) {
       console.log(err);
     }

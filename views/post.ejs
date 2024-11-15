@@ -1,6 +1,6 @@
 <%- include('partials/header') -%>
-<p><strong>User</strong>: <%= user.userName %></p>
-<p><strong>Bio</strong>: <%= user.bio || 'The User have no bio ' %></p>
+<p><strong>User</strong>: <%= postUser.userName %></p>
+<p><strong>Bio</strong>: <%= postUser.bio || 'The User has no bio' %></p>
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-6">
@@ -21,6 +21,11 @@
       <h3 class="col-3">Likes: <%= post.likes %></h3>      
       </div>
     </div>
+    <% if (post.user == loggedInUser.id) { %>
+      <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST" class="col-3">
+        <button class="btn btn-primary fa fa-trash" type="submit"></button>
+      </form>
+    <% } %> 
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>

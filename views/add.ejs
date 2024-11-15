@@ -7,7 +7,7 @@
               <form action="/post/createPost" enctype="multipart/form-data" method="POST">
                 <div class="mb-3">
                   <label for="title" class="form-label">Tag</label>
-                  <select class="select select-bordered" id="title" name="title">
+                  <select class="select select-bordered" id="title" name="title"  required >
                       <option value="" disabled selected>Select a tag</option>
                       <option value="Exercise">Exercise</option>
                       <option value="Receipe">Receipe</option>
@@ -16,11 +16,11 @@
               
                 <div class="mb-3">
                   <label for="caption" class="form-label">Caption</label>
-                  <textarea class="form-control" id="caption" name="caption"></textarea>
+                  <textarea class="form-control" id="caption" name="caption"  required ></textarea>
                 </div>
                 <div class="mb-3">
                   <label for="imgUpload" class="form-label">Image</label>
-                  <input type="file" class="form-control" id="imageUpload" name="file">
+                  <input type="file" class="form-control" id="imageUpload" name="file"  required >
                 </div>
                 <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
               </form>

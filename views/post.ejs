@@ -34,8 +34,7 @@
       <form action="/comment/createComment/<%=post._id%>" method="POST">
         <div class="mb-3">
             <label for="comment" class="form-label">Comment</label>
-
-            <input type="text" class="form-control" id="comment" name="comment">
+            <input type="text" class="form-control" id="comment" name="comment" required >
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>

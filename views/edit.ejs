@@ -1,5 +1,9 @@
 <%- include('partials/header') -%>
-<form action="/profile" method="POST" class="space-y-4">
+<form action="/profile" method="POST" enctype="multipart/form-data" class="space-y-4">
+    <div class="mb-4">
+     <label for="profileImage" class="block text-white font-semibold mb-2">Profile Picture</label>
+      <input type="file" id="profileImage" name="profileImage" accept="image/*" class="text-white">
+    </div>
     <div class="mb-4">
       <label for="bio" class="block text-white font-semibold mb-2">Bio</label>
       <input type="text" class="text-black bg-white border-gray-800" id="bio" name="bio" value="<%= user.bio %>">

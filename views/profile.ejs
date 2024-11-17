@@ -3,6 +3,11 @@
   <div class="row mt-5">
       <div class="col-6">
           <div>
+            <% if (user.profileImage) { %>
+              <img src="<%= user.profileImage %>" alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="max-width: 150px;">
+            <% } else { %>
+              <img src="/img/default-profile.png" alt="Default Profile Picture" class="img-fluid rounded-circle mb-3" style="max-width: 150px;">
+            <% } %>
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
               <p><strong>Bio</strong>: <%= user.bio || 'The User have no bio ' %></p>

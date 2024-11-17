@@ -110,12 +110,23 @@ module.exports = {
   updateProfile: async (req, res) => {
     try {
       const user = await User.findById(req.user.id);
-
+  
       user.bio = req.body.bio;
-
-
+  
+      if (req.file) {
+        // Delete old profile image from Cloudinary if it exists
+        if (user.profileImage) {
+          await cloudinary.uploader.destroy(user.cloudinaryId);
+        }
+        
+        // Upload new image to cloudinary
+        const result = await cloudinary.uploader.upload(req.file.path);
+        user.profileImage = result.secure_url;
+        user.cloudinaryId = result.public_id;
+      }
+  
       await user.save();
-
+      console.log("Profile updated successfully");
       res.redirect("/profile");
     } catch (err) {
       console.log(err);

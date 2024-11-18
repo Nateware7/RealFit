@@ -1779,10 +1779,6 @@ html {
   background-color: rgb(9 9 11 / var(--tw-bg-opacity));
 }
 
-.bg-transparent {
-  background-color: transparent;
-}
-
 .bg-opacity-90 {
   --tw-bg-opacity: 0.9;
 }

@@ -72,27 +72,38 @@ module.exports = {
   likePost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-  
-      // Check if the user has already liked the post
-      if (post.likedBy.includes(req.user.id)) {
-        // If the user has already liked, prevent the action
-        console.log("You have already liked this post.");
-        return res.redirect(`/post/${req.params.id}`); // Redirect back to the post page
+      
+      // Ensure the post exists
+      if (!post) {
+        return res.status(404).send("Post not found");
       }
   
-      // If not, add the user to the likedBy array and increment the like count
-      post.likes++;
-      post.likedBy.push(req.user.id);
+      const userId = req.user.id;  // Make sure req.user.id is populated correctly
   
+      // Check if the user has already liked the post
+      if (post.likedBy.includes(userId)) {
+        // User has already liked, so we will "unlike" (remove the like)
+        post.likes--;  // Decrease the like count
+        post.likedBy = post.likedBy.filter(id => id.toString() !== userId);  // Remove the user ID from likedBy
+        console.log(`Unlike action: Likes decreased to ${post.likes}`);
+      } else {
+        // User hasn't liked the post yet, so we will "like" (add the like)
+        post.likes++;  // Increase the like count
+        post.likedBy.push(userId);  // Add the user ID to likedBy
+        console.log(`Like action: Likes increased to ${post.likes}`);
+      }
+  
+      // Save the updated post document
       await post.save();
   
-      console.log("Likes +1");
-      res.redirect(`/post/${req.params.id}`); // Redirect to the post page after liking
+      // Redirect to the post page to reflect the updated state
+      res.redirect(`/post/${post.id}`);
     } catch (err) {
-      console.log(err);
-      res.redirect(`/post/${req.params.id}`);
+      console.log("Error during like/unlike action:", err);
+      res.status(500).send("Server error");
     }
-  },  
+  },
+    
   deletePost: async (req, res) => {
     try {
       // Find post by id

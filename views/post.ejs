@@ -7,18 +7,16 @@
       <h2><%= post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
-        <form
-        class="col-1"
-        action="/post/likePost/<%= post.id %>?_method=PUT"
-        method="POST"
-      >
-        <% if(post.likedBy && post.likedBy.includes(user.id)) { %>
-          <button class="btn btn-primary fa fa-heart" type="submit" disabled>Liked</button>
-        <% } else { %>
-          <button class="btn btn-primary fa fa-heart" type="submit">Like</button>
-        <% } %>
-      </form>
-      <h3 class="col-3">Likes: <%= post.likes %></h3>      
+        <form class="col-1" action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
+          <% if (post.likedBy && post.likedBy.includes(user.id)) { %>
+            <button class="btn btn-primary fa fa-heart" type="submit">Unlike</button>
+          <% } else { %>
+            <button class="btn btn-primary fa fa-heart" type="submit">Like</button>
+          <% } %>
+        </form>
+        
+        <p>Likes: <%= post.likes %></p> <!-- Show the number of likes -->
+        
       </div>
     </div>
     <% if (post.user == loggedInUser.id) { %>

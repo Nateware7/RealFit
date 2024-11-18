@@ -42,7 +42,16 @@
     <ul>
       <% for(var i=0; i<comments.length; i++) {%>
         <li class="col-6 justify-content-between mt-5">
-          <%= comments[i].comment%>
+          <div class="d-flex align-items-center">
+            <strong>
+              <% if (comments[i].user && comments[i].user.userName) { %>
+                <%= comments[i].user.userName %>
+              <% } else { %>
+                Anonymous
+              <% } %>
+            </strong>
+          </div>
+          <p class="mt-2"><%= comments[i].comment %></p>
         </li>
       <% } %>
     </ul>

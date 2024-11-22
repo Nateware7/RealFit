@@ -33,21 +33,26 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
+      const posts = await Post.find()
+        .sort({ createdAt: "desc" })
+        .populate('user', 'profileImage userName') // Populate user field with specific data
+        .lean();
       res.render("feed.ejs", { posts: posts });
     } catch (err) {
       console.log(err);
+      res.redirect('/');
     }
-  },
+  },  
   getPost: async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id);
+      const post = await Post.findById(req.params.id).populate('user', 'userName').exec();
       const comments = await Comment.find({post: req.params.id}).populate('user', 'userName').sort({ createdAt: "desc" }).lean();
       // Fetch the user who created the post
       const postUser = await User.findById(post.user);
       res.render("post.ejs", { post: post, loggedInUser: req.user, comments: comments, postUser: postUser });
     } catch (err) {
       console.log(err);
+      res,redirect('/')
     }
   },
   createPost: async (req, res) => {

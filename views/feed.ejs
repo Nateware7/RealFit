@@ -14,6 +14,8 @@
             <% } else { %>
               <img src="/imgs/anyn.png" alt="Default Profile Picture" class="img-fluid rounded-circle mb-3" style="max-width: 150px;">
             <% } %>
+            <!-- Display the post tag -->
+            <h2><%= posts[i].title %></h2>
             <!-- Display the post image -->
             <img class="img-fluid" src="<%= posts[i].image %>">
           </a>

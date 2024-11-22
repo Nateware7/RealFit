@@ -1,10 +1,12 @@
 <%- include('partials/header') -%>
 <div>
-  <% if (postUser.profileImage) { %>
-    <img src="<%= postUser.profileImage %>" alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="max-width: 150px;">
-  <% } else { %>
-    <img src="/imgs/anyn.png" alt="Default Profile Picture" class="img-fluid rounded-circle mb-3" style="max-width: 150px;">
-  <% } %>  
+  <a href="/profile/<%= postUser._id %>"> 
+    <% if (postUser.profileImage) { %>
+      <img src="<%= postUser.profileImage %>" alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="max-width: 150px;">
+    <% } else { %>
+      <img src="/imgs/anyn.png" alt="Default Profile Picture" class="img-fluid rounded-circle mb-3" style="max-width: 150px;">
+    <% } %>
+  </a>  
 <p><strong>User</strong>: <%= postUser.userName %></p>
 <p><strong>Bio</strong>: <%= postUser.bio || 'The User has no bio' %></p>
   </div>

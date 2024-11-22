@@ -7,12 +7,12 @@ const User = require("../models/User");
 module.exports = {
   getProfile: async (req, res) => {
     try {
-      const posts = await Post.find({ user: req.user.id });
-      const user = await User.findById(req.user.id);
-      res.render("profile.ejs", { posts: posts, user: user });
-  
+      const user = await User.findById(req.params.userId); // Get the user by their ID
+      const posts = await Post.find({ user: user._id }); // Get the posts of that user
+      res.render("profile.ejs", { user: user, posts: posts, loggedInUser: req.user }); // Pass loggedInUser to the view
     } catch (err) {
       console.log(err);
+      res.redirect("/"); // If there's an error, redirect to the homepage
     }
   },  
   getAdd: async (req, res) => {

@@ -8,11 +8,11 @@ const upload = require("../middleware/multer");
 
 //Main Routes - simplified for now
 router.get("/", homeController.getIndex);
-router.get("/profile", ensureAuth, postsController.getProfile);
+router.get("/profile/:userId", ensureAuth, postsController.getProfile); // New dynamic route
 router.get("/add", ensureAuth, postsController.getAdd);
 router.get("/feed", ensureAuth, postsController.getFeed);
 router.get("/edit", ensureAuth, postsController.getEdit);
-router.get("/login",ensureGuest, authController.getLogin);
+router.get("/login", ensureGuest, authController.getLogin);
 router.post("/login", authController.postLogin);
 router.get("/logout", authController.logout);
 router.get("/signup", authController.getSignup);

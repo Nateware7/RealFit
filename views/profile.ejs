@@ -8,27 +8,33 @@
             <% } else { %>
               <img src="/imgs/anyn.png" alt="Default Profile Picture" class="img-fluid rounded-circle mb-3 " style="max-width: 150px;">
             <% } %>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-              <p><strong>Email</strong>: <%= user.email %></p>
-              <p><strong>Bio</strong>: <%= user.bio || 'The User have no bio ' %></p>
+            <p><strong>User Name</strong>: <%= user.userName %></p>
+            <p><strong>Email</strong>: <%= user.email %></p>
+            <p><strong>Bio</strong>: <%= user.bio || 'The User has no bio' %></p>
+
+            <% if (user._id.toString() === loggedInUser._id.toString()) { %> <!-- Only show if the logged-in user is the profile owner -->
               <a href="/edit" class="col-3 btn btn-primary">Edit Profile</a>
-          </div>
-          <div class="col-6">
-            <ul class="row list-unstyled">
-            <% for(var i=0; i<posts.length; i++) {%>
-              <li class="col-6 justify-content-between mt-5">
-                <a href="/post/<%= posts[i]._id%>">
-                  <img class="img-fluid" src="<%= posts[i].image%>">
-                </a>
-              </li>
             <% } %>
-            </ul>
-          </div>  
-        <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/add">Add a Post</a>
-        </div>  
-      </div>  
+          </div>
+      </div>
+      <div class="col-6">
+        <ul class="row list-unstyled">
+        <% for(var i=0; i<posts.length; i++) {%>
+          <li class="col-6 justify-content-between mt-5">
+            <a href="/post/<%= posts[i]._id %>">
+              <img class="img-fluid" src="<%= posts[i].image %>">
+            </a>
+          </li>
+        <% } %>
+        </ul>
+      </div>
     </div>
-  </div>
+
+    <% if (user._id.toString() === loggedInUser._id.toString()) { %> <!-- Only show Add Post link if logged-in user is the profile owner -->
+    <div class="row justify-content-center mt-5">
+      <a class="btn btn-primary" href="/add">Add a Post</a>
+    </div>
+    <% } %>  
+</div> 
   
 <%- include('partials/footer') -%>

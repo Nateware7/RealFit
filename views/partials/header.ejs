@@ -36,8 +36,8 @@
           </a>
         </div>
         <% if (user) { %>
-          <a class="text-red-600" href="/profile">Return to Profile</a>
-        <% } %>
+          <a class="text-red-600" href="/profile/<%= user._id %>">Return to Profile</a>
+        <% } %>        
       </nav>
     </header>
   </body>

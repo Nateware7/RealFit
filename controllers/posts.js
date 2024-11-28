@@ -143,7 +143,7 @@ module.exports = {
   
       await user.save();
       console.log("Profile updated successfully");
-      res.redirect("/profile");
+      res.redirect(`/profile/${req.user.id}`);
     } catch (err) {
       console.log(err);
       res.redirect("/edit");

@@ -28,11 +28,11 @@
         
       </div>
     </div>
-    <% if (post.user == loggedInUser.id) { %>
+    <% if (post.user._id.toString() === loggedInUser.id.toString()) { %>
       <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST" class="col-3">
         <button class="btn btn-primary fa fa-trash" type="submit"></button>
       </form>
-    <% } %> 
+    <% } %>    
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>

@@ -1535,10 +1535,6 @@ html{
   margin-top: 0px;
 }
 
-.fixed{
-  position: fixed;
-}
-
 .absolute{
   position: absolute;
 }
@@ -1604,6 +1600,10 @@ html{
   margin-top: 0.25rem;
 }
 
+.mt-10{
+  margin-top: 2.5rem;
+}
+
 .mt-14{
   margin-top: 3.5rem;
 }
@@ -1618,22 +1618,6 @@ html{
 
 .mt-5{
   margin-top: 1.25rem;
-}
-
-.mt-3{
-  margin-top: 0.75rem;
-}
-
-.ml-2{
-  margin-left: 0.5rem;
-}
-
-.ml-1{
-  margin-left: 0.25rem;
-}
-
-.mt-10{
-  margin-top: 2.5rem;
 }
 
 .block{
@@ -1906,6 +1890,12 @@ html{
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }
 
+.from-black{
+  --tw-gradient-from: #000 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(0 0 0 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
 .from-orange-400{
   --tw-gradient-from: #fb923c var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(251 146 60 / 0) var(--tw-gradient-to-position);
@@ -1924,16 +1914,8 @@ html{
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
-.from-orange-700{
-  --tw-gradient-from: #c2410c var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(194 65 12 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
-.from-black{
-  --tw-gradient-from: #000 var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(0 0 0 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+.to-gray-700{
+  --tw-gradient-to: #374151 var(--tw-gradient-to-position);
 }
 
 .to-orange-400{
@@ -1946,14 +1928,6 @@ html{
 
 .to-yellow-500{
   --tw-gradient-to: #eab308 var(--tw-gradient-to-position);
-}
-
-.to-black{
-  --tw-gradient-to: #000 var(--tw-gradient-to-position);
-}
-
-.to-gray-700{
-  --tw-gradient-to: #374151 var(--tw-gradient-to-position);
 }
 
 .bg-cover{
@@ -1992,26 +1966,6 @@ html{
 
 .p-8{
   padding: 2rem;
-}
-
-.p-1{
-  padding: 0.25rem;
-}
-
-.p-16{
-  padding: 4rem;
-}
-
-.p-20{
-  padding: 5rem;
-}
-
-.p-24{
-  padding: 6rem;
-}
-
-.p-28{
-  padding: 7rem;
 }
 
 .px-24{

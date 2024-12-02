@@ -82,28 +82,37 @@
     <!-- Separator Line -->
     <div class="-mx-4 border-t border-gray-200 my-4"></div>
   
-    <!-- Comments Section -->
-    <div class="mt-6">
-      <h2 class="text-lg font-bold text-gray-900 mb-4">Comments <span class="text-orange-600"><%= post.comments %></span></h2>
-      <ul class="space-y-4">
-        <% comments.forEach(comment => { %>
-          <li class="flex items-start space-x-3">
-            <img
-              src="<%= comment.user && comment.user.profileImage || '/imgs/anyn.png' %>"
-              alt="Commenter Profile Picture"
-              class="w-8 h-8 rounded-full"
-            />
-            <div>
-              <p class="text-sm font-semibold text-gray-900">
-                <%= comment.user && comment.user.userName || 'Anonymous' %>
-              </p>
-              <p class="text-sm text-gray-700"><%= comment.comment %></p>
-            </div>
-          </li>
-        <% }) %>
-      </ul>
-    </div>
-  
+ <!-- Comments Section -->
+<div class="mt-6">
+  <h2 class="text-lg font-bold text-gray-900 mb-4">Comments <span class="text-orange-600"><%= post.comments %></span></h2>
+  <ul class="space-y-4">
+    <% comments.forEach(comment => { %>
+      <li class="flex items-start space-x-3">
+        <img
+          src="<%= comment.user && comment.user.profileImage || '/imgs/anyn.png' %>"
+          alt="Commenter Profile Picture"
+          class="w-8 h-8 rounded-full"
+        />
+        <div>
+          <p class="text-sm font-semibold text-gray-900">
+            <%= comment.user && comment.user.userName || 'Anonymous' %>
+          </p>
+          <p class="text-sm text-gray-700"><%= comment.comment %></p>
+
+          <!-- Delete Icon -->
+          <% if (loggedInUser && comment.user._id.toString() === loggedInUser._id.toString()) { %>
+            <form action="/comment/deleteComment/<%= comment._id %>" method="POST" class="inline">
+              <button type="submit" class="text-red-500 hover:text-red-700">
+                <i class="fas fa-trash-alt"></i> Delete
+              </button>
+            </form>
+          <% } %>
+        </div>
+      </li>
+    <% }) %>
+  </ul>
+</div>
+
     <!-- Separator Line -->
     <div class="-mx-4 border-t border-gray-200 my-4"></div>
   

@@ -22,6 +22,10 @@ const PostSchema = new mongoose.Schema({
     default: 0,
   },
   likedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  comments: {
+    type: Number,
+    default: 0, // Default to 0 when the post is created
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -30,6 +34,7 @@ const PostSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+
 });
 
 module.exports = mongoose.model("Post", PostSchema);

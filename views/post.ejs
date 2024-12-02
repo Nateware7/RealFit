@@ -1,68 +1,138 @@
 <%- include('partials/header') -%>
-<div>
-  <a href="/profile/<%= postUser._id %>"> 
-    <% if (postUser.profileImage) { %>
-      <img src="<%= postUser.profileImage %>" alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="max-width: 150px;">
-    <% } else { %>
-      <img src="/imgs/anyn.png" alt="Default Profile Picture" class="img-fluid rounded-circle mb-3" style="max-width: 150px;">
-    <% } %>
-  </a>  
-<p><strong>User</strong>: <%= postUser.userName %></p>
-<p><strong>Bio</strong>: <%= postUser.bio || 'The User has no bio' %></p>
-  </div>
-<div class="container">
-  <div class="row justify-content-center mt-5">
-    <div class="col-6">
-      <h2><%= post.title %></h2>
-      <img class="img-fluid" src="<%= post.image%>" />
-      <div class="row justify-content-between">
-        <form class="col-1" action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
-          <% if (post.likedBy && post.likedBy.includes(user.id)) { %>
-            <button class="btn btn-primary fa fa-heart" type="submit">Unlike</button>
-          <% } else { %>
-            <button class="btn btn-primary fa fa-heart" type="submit">Like</button>
-          <% } %>
-        </form>
-        
-        <p>Likes: <%= post.likes %></p> <!-- Show the number of likes -->
-        
+<body>
+  <div class="bg-gray-100 w-full h-auto flex flex-col justify-center items-center p-14">
+  <div class="max-w-5xl max-h-full mx-auto bg-white border border-gray-200 rounded-lg shadow-md p-5">
+    <!-- Header -->
+    <div class="flex items-center mb-4 flex-wrap">
+      <a href="/profile/<%= postUser._id %>" class="w-10 h-10">
+        <img
+          src="<%= postUser.profileImage || '/imgs/anyn.png' %>"
+          alt="Profile Picture"
+          class="w-10 h-10 rounded-full"
+        />
+      </a>
+      <div class="ml-3 mt-2 sm:mt-0">
+        <h1 class="text-base font-semibold text-gray-900"><%= postUser.userName %></h1>
       </div>
     </div>
-    <% if (post.user._id.toString() === loggedInUser.id.toString()) { %>
-      <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST" class="col-3">
-        <button class="btn btn-primary fa fa-trash" type="submit"></button>
-      </form>
-    <% } %>    
-    <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
+  
+    <!-- Separator Line -->
+    <div class="-mx-4 border-t border-gray-200"></div>
+  
+    <!-- Post Content -->
+    <h1 class="text-lg font-bold text-gray-900 my-3"><%= post.title %></h1>
+    <div class="rounded-lg overflow-hidden mb-4">
+      <img
+        src="<%= post.image %>"
+        alt="Post Image"
+        class="w-full max-w-full h-auto"
+      />
     </div>
-    <div class="mt-5">
-      <h2>Add a comment</h2>
-      <form action="/comment/createComment/<%=post._id%>" method="POST">
-        <div class="mb-3">
-            <label for="comment" class="form-label">Comment</label>
-            <input type="text" class="form-control" id="comment" name="comment" required >
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </div>
-    <ul>
-      <% for(var i=0; i<comments.length; i++) {%>
-        <li class="col-6 justify-content-between mt-5">
-          <div class="d-flex align-items-center">
-            <strong>
-              <% if (comments[i].user && comments[i].user.userName) { %>
-                <%= comments[i].user.userName %>
-              <% } else { %>
-                Anonymous
-              <% } %>
-            </strong>
-          </div>
-          <p class="mt-2"><%= comments[i].comment %></p>
-        </li>
+    <h2 class="text-sm sm:text-base text-gray-800 mb-4"><%= post.caption %></h2>
+  
+    <!-- Engagement -->
+    <div class="flex items-center justify-between text-gray-600 text-sm flex-wrap">
+      <div class="flex space-x-4">
+        <form action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
+          <button
+            class="flex items-center space-x-1 text-gray-600 hover:text-blue-500"
+            type="submit"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="<%= post.likedBy && post.likedBy.includes(user.id) ? 'M14 9l-5 5m0 0l5 5m-5-5H2' : 'M5 13l4 4L19 7' %>"
+              />
+            </svg>
+            <span><%= post.likedBy && post.likedBy.includes(user.id) ? 'Unlike' : 'Like' %></span>
+          </button>
+        </form>
+        <span class="text-purple-500"><%= post.likes %> Likes</span>
+      </div>
+      <% if (post.user._id.toString() === loggedInUser.id.toString()) { %>
+        <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST">
+          <button class="text-red-500 hover:text-red-700 mt-2 sm:mt-0" type="submit">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </form>
       <% } %>
-    </ul>
+    </div>
+  
+    <!-- Separator Line -->
+    <div class="-mx-4 border-t border-gray-200 my-4"></div>
+  
+    <!-- Comments Section -->
+    <div class="mt-6">
+      <h2 class="text-lg font-bold text-gray-900 mb-4">Comments <span class="text-orange-600"><%= post.comments %></span></h2>
+      <ul class="space-y-4">
+        <% comments.forEach(comment => { %>
+          <li class="flex items-start space-x-3">
+            <img
+              src="<%= comment.user && comment.user.profileImage || '/imgs/anyn.png' %>"
+              alt="Commenter Profile Picture"
+              class="w-8 h-8 rounded-full"
+            />
+            <div>
+              <p class="text-sm font-semibold text-gray-900">
+                <%= comment.user && comment.user.userName || 'Anonymous' %>
+              </p>
+              <p class="text-sm text-gray-700"><%= comment.comment %></p>
+            </div>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+  
+    <!-- Separator Line -->
+    <div class="-mx-4 border-t border-gray-200 my-4"></div>
+  
+    <!-- Comment Input -->
+    <div class="flex flex-wrap items-center mt-6 space-x-2">
+      <img
+        src="<%= loggedInUser.profileImage || '/imgs/anyn.png' %>"
+        alt="User Profile Picture"
+        class="w-10 h-10 rounded-full"
+      />
+      <form action="/comment/createComment/<%= post._id %>" method="POST" class="flex-1">
+        <input
+          type="text"
+          name="comment"
+          placeholder="Write your comment..."
+          class="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        />
+        <button
+          type="submit"
+          class="bg-blue-500 text-white px-4 py-2 text-sm font-medium rounded-lg hover:bg-blue-600 mt-2"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
   </div>
-</div>
+  </div>
+  </body>
+  
 
 <%- include('partials/footer') -%>

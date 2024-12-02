@@ -46,7 +46,7 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id).populate('user', 'userName').exec();
-      const comments = await Comment.find({post: req.params.id}).populate('user', 'userName').sort({ createdAt: "desc" }).lean();
+      const comments = await Comment.find({post: req.params.id}).populate('user', 'userName profileImage').sort({ createdAt: "desc" }).lean();
       // Fetch the user who created the post
       const postUser = await User.findById(post.user);
       res.render("post.ejs", { post: post, loggedInUser: req.user, comments: comments, postUser: postUser });
